@@ -29,7 +29,7 @@ class SubmenuOnTopmenu extends Model
 
     function getAllSubmenuOnTopmenu(){       
 
-        $data =  SubmenuOnTopMenu::where('SubmenuOnTopmenu.Status', '!=', DELETED_FLG)
+        $data =  SubmenuOnTopmenu::where('SubmenuOnTopmenu.Status', '!=', DELETED_FLG)
                 ->with([
                     'topmenu.title.textcontent', // Load quan hệ `itemTitle` từ `signage`
                     'submenu.title.textcontent' // Load quan hệ `deviceTouch`
@@ -39,14 +39,14 @@ class SubmenuOnTopmenu extends Model
     }
 
     function getSubmenuOnTopmenuById($TopMenuId,$SubMenuID){
-        $return = SubmenuOnTopMenu::where('TopMenuId', $TopMenuId)
+        $return = SubmenuOnTopmenu::where('TopMenuId', $TopMenuId)
             ->where('SubMenuID',$SubMenuID)->first();
         return $return;
     }
 
     //Show for each Menu to AllSubmenu
     function getAllSubmenuOnTopmenuById($TopMenuId){
-        $return = SubmenuOnTopMenu::where('TopMenuId', $TopMenuId)
+        $return = SubmenuOnTopmenu::where('TopMenuId', $TopMenuId)
         ->get();
         return $return;
     }

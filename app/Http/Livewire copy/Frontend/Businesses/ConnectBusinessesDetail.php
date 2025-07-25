@@ -57,7 +57,6 @@ class ConnectBusinessesDetail extends Component
         //$this->incrementView();
 
         $re_connect_bs = ConnectBusinesses::where('id', '!=', $this->connect_businesses->id)
-            ->where('Status', '!=', DISABLE)
             ->where('SubMenuId', $this->connect_businesses->SubMenuId)
        
             ->orderBy('ModifiDate', 'desc')
