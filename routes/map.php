@@ -201,6 +201,11 @@ Route::middleware(['check_user'])->group(function () {
         Route::get('/group-search-map-item-edit/{id}', GroupSearchMapItemDetail::class)->name('group-search-map-item-edit');
     });
 
+    Route::middleware(['module_permission:key-search'])->group(function () {
+        // Route key search
+        Route::get('/key-search', KeySearchLive::class)->name('key-search');
+    });
+
     Route::middleware(['module_permission:banner-adv'])->group(function () {
         // Banner Adv
         Route::get('/banner-adv', BannerAdvLive::class)->name('banner-adv');
@@ -377,9 +382,6 @@ Route::middleware(['check_user'])->group(function () {
         Route::get('/admin-management-edit/{id}', AdminManagementDetail::class)->name('admin-management-edit');
     });
 
-    // Route key search
-    Route::get('/key-search', KeySearchLive::class)->name('key-search');
-    
     // Route dành cho user profile và đổi mật khẩu
     Route::get('/user-profile', UserInformation::class)->name('user.profile');
 });
