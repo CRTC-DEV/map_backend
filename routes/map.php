@@ -142,6 +142,9 @@ use App\Http\Livewire\Map\ContactNumberType\ContactNumberTypeAddLive;
 use App\Http\Livewire\Map\ContactNumberType\ContactNumberTypeLive;
 use App\Http\Livewire\Map\ContactNumberType\ContactNumberTypeDetailLive;
 
+//KeySearch
+use App\Http\Livewire\Map\KeySearch\KeySearchLive;
+
 //EtagApi
 use App\Http\Livewire\API\EtagApi;
 
@@ -374,6 +377,9 @@ Route::middleware(['check_user'])->group(function () {
         Route::get('/admin-management-edit/{id}', AdminManagementDetail::class)->name('admin-management-edit');
     });
 
+    // Route key search
+    Route::get('/key-search', KeySearchLive::class)->name('key-search');
+    
     // Route dành cho user profile và đổi mật khẩu
     Route::get('/user-profile', UserInformation::class)->name('user.profile');
 });
