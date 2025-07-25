@@ -1,0 +1,125 @@
+/* Header CSS */
+.site-header {
+    padding: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Logo */
+  .logo {
+    flex: 0 0 auto;
+    margin-right: 20px;
+  }
+  
+  .logo img {
+    height: 60px;
+    width: auto;
+  }
+  
+  /* Main Navigation */
+  .main-navigation {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .menu li {
+    position: relative;
+    margin: 0 5px;
+  }
+  
+  .menu li a {
+    display: block;
+    padding: 10px 15px;
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+    text-transform: uppercase;
+  }
+  
+  .menu li a:hover {
+    color: #1a3a7a;
+  }
+  
+  /* Right Side Elements */
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Language Selector */
+  .language-selector {
+    margin-right: 15px;
+  }
+  
+  .lang-btn {
+    background-color: #1a3a7a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .lang-btn .arrow-down {
+    margin-left: 5px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+  }
+  
+  /* Search Button */
+  .search-button button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .search-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('path/to/search-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .menu {
+      display: none; /* Will need JavaScript for mobile menu toggle */
+    }
+    
+    .header-wrapper {
+      justify-content: space-between;
+    }
+  }
+  

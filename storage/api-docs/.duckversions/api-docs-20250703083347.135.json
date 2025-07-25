@@ -1,0 +1,1060 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Map Backend API Documentation",
+        "description": "API documentation for Map Backend",
+        "contact": {
+            "email": "dev@camranh.aero"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://camranh.aero/map-backend-staging",
+            "description": "Rest API"
+        }
+    ],
+    "paths": {
+        "/api/getdevicetouchbycode/{devicecode}": {
+            "get": {
+                "tags": [
+                    "DeviceTouchScreen"
+                ],
+                "summary": "Get SignageMapItem resources",
+                "operationId": "0fd7d6a93c44a5e6d5b19408e27a6260",
+                "parameters": [
+                    {
+                        "name": "devicecode",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/getdevicetouchbyserial/{deviceserial}": {
+            "get": {
+                "tags": [
+                    "DeviceTouchScreen"
+                ],
+                "summary": "Get SignageMapItem resources",
+                "operationId": "0fd7d6a93c44a5e6d5b19408e27a6260",
+                "parameters": [
+                    {
+                        "name": "deviceserial",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/event-all": {
+            "get": {
+                "tags": [
+                    "Event"
+                ],
+                "summary": "Get All Event resources",
+                "operationId": "97cf60a3e388502d2fb32f7405323253",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/event&language={languageid}": {
+            "get": {
+                "tags": [
+                    "Event"
+                ],
+                "summary": "Get Event resources",
+                "operationId": "efe7292503f229ba60fb702f15e67995",
+                "parameters": [
+                    {
+                        "name": "languageid",
+                        "in": "path",
+                        "description": "Language Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/event": {
+            "put": {
+                "tags": [
+                    "Event"
+                ],
+                "summary": "Update Event resource",
+                "operationId": "26dd63ad11e698f0e4384131627617d4",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "eventid"
+                                ],
+                                "properties": {
+                                    "eventid": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Event"
+                ],
+                "summary": "Get Event resource",
+                "operationId": "de11e6a9870926b9a88fd53d047706dc",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "languageid"
+                                ],
+                                "properties": {
+                                    "languageid": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/groupfunctiondevice": {
+            "get": {
+                "tags": [
+                    "GroupFunctionDevice"
+                ],
+                "summary": "Get GroupFunctionDevice resources",
+                "operationId": "4664c1dea932f00b193f90336e2e3e6a",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "GroupFunctionDevice"
+                ],
+                "summary": "Get GroupFunctionDevice resource",
+                "operationId": "b44b64d38ed04c4a317fa811bc53f002",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "DeviceId",
+                                    "LanguageId"
+                                ],
+                                "properties": {
+                                    "DeviceId": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "LanguageId": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/groupmainfunctionsignage&language={languageid}&floor={floor}": {
+            "get": {
+                "tags": [
+                    "GroupMainFunction"
+                ],
+                "summary": "Get GroupMainFunction resources",
+                "operationId": "0ba0b496082596c69ac02baf9785eb88",
+                "parameters": [
+                    {
+                        "name": "languageid",
+                        "in": "path",
+                        "description": "Language Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "floor",
+                        "in": "path",
+                        "description": "Floor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/groupmainfunctiondevice&language={languageid}&floor={floor}&device={deviceid}": {
+            "get": {
+                "tags": [
+                    "GroupMainFunction"
+                ],
+                "summary": "Get GroupMainFunction resources",
+                "operationId": "0ba0b496082596c69ac02baf9785eb88",
+                "parameters": [
+                    {
+                        "name": "languageid",
+                        "in": "path",
+                        "description": "Language Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "floor",
+                        "in": "path",
+                        "description": "floor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "deviceid",
+                        "in": "path",
+                        "description": "devive Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/groupmainfunctionsignage": {
+            "post": {
+                "tags": [
+                    "GroupMainFunction"
+                ],
+                "summary": "Post groupmainfunctionsignage resource",
+                "operationId": "7d7788e609b4e4d9c9f1d41906783fc7",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "G-Id",
+                                    "LanguageId"
+                                ],
+                                "properties": {
+                                    "G-Id": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "LanguageId": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/groupsearchmapitem/{keysearch}": {
+            "get": {
+                "tags": [
+                    "GroupSearchMapItem"
+                ],
+                "summary": "Get GroupSearchMapItem resources",
+                "operationId": "d6060cb28aeeccba5265e3500252aa7e",
+                "parameters": [
+                    {
+                        "name": "keysearch",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/groupsearchmapitemondevice/{keysearch}/{deviceserial}": {
+            "get": {
+                "tags": [
+                    "GroupSearchMapItem"
+                ],
+                "summary": "Get GroupSearchMapItem resources",
+                "operationId": "d6060cb28aeeccba5265e3500252aa7e",
+                "parameters": [
+                    {
+                        "name": "keysearch",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "deviceserial",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/groupsearchmapitem": {
+            "post": {
+                "tags": [
+                    "GroupSearchMapItem"
+                ],
+                "summary": "Get GroupSearchMapItem resource",
+                "operationId": "b6dca45850fb5614109e2cb51724ed54",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "keysearch"
+                                ],
+                                "properties": {
+                                    "keysearch": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/itemdescription/{id}": {
+            "get": {
+                "tags": [
+                    "ItemDescription"
+                ],
+                "summary": "Get ItemDescription resources",
+                "operationId": "f9ebe35aa190ada13056f0c4a8ed5a82",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/itemdescription": {
+            "post": {
+                "tags": [
+                    "ItemDescription"
+                ],
+                "summary": "Get ItemDescription resource",
+                "operationId": "413f3381954a8acd886fbb22477e17f3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "floor",
+                                    "catid",
+                                    "languageid"
+                                ],
+                                "properties": {
+                                    "floor": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "catid": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "languageid": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/mapitem/{floor}": {
+            "get": {
+                "tags": [
+                    "Map Items"
+                ],
+                "summary": "Get map items by floor number",
+                "operationId": "0939c7f82fb93eb80a9d43848e2c035d",
+                "parameters": [
+                    {
+                        "name": "floor",
+                        "in": "path",
+                        "description": "Floor number",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/MapItem"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/mapitem": {
+            "post": {
+                "tags": [
+                    "Map Items"
+                ],
+                "summary": "Get map items ",
+                "operationId": "b3fcdcc027ac0954feaa4017aee6df1b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "floor"
+                                ],
+                                "properties": {
+                                    "floor": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/MapItem"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/routemapitemdetail/{id}": {
+            "get": {
+                "tags": [
+                    "RouteMapItemDetail"
+                ],
+                "summary": "Get RouteMapItemDetail resources",
+                "operationId": "cf5996b49988c3bc4083a8ee3b47b017",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/routemapitemdetail": {
+            "post": {
+                "tags": [
+                    "RouteMapItemDetail"
+                ],
+                "summary": "Get RouteMapItemDetail resource",
+                "operationId": "74260e97fac29e04ce8161d69c731773",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/signage&language={languageid}": {
+            "get": {
+                "tags": [
+                    "Signage"
+                ],
+                "summary": "Get Signage resources",
+                "operationId": "238d459b66be68ce88149f8f7b9d3259",
+                "parameters": [
+                    {
+                        "name": "languageid",
+                        "in": "path",
+                        "description": "Language Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/signage": {
+            "post": {
+                "tags": [
+                    "Signage"
+                ],
+                "summary": "Get Signage resource",
+                "operationId": "71b3d4196f07d263e017358c7282f98f",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "languageid"
+                                ],
+                                "properties": {
+                                    "languageid": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/signagedevicetouch": {
+            "get": {
+                "tags": [
+                    "SignageDeviceTouch"
+                ],
+                "summary": "Get SignageDeviceTouch resources",
+                "operationId": "e93f2f3ee12f5f4a6b1f6442c3532461",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "SignageDeviceTouch"
+                ],
+                "summary": "Get SignageDeviceTouch resource",
+                "operationId": "87bd434dcdb4eb586d0b46d92f127737",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "DeviceTouchScreenId",
+                                    "LanguageId"
+                                ],
+                                "properties": {
+                                    "DeviceTouchScreenId": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "LanguageId": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/signagemapitem/{id}": {
+            "get": {
+                "tags": [
+                    "SignageMapItem"
+                ],
+                "summary": "Get SignageMapItem resources",
+                "operationId": "0fd7d6a93c44a5e6d5b19408e27a6260",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/signagemapitem": {
+            "post": {
+                "tags": [
+                    "SignageMapItem"
+                ],
+                "summary": "Get SignageMapItem resource",
+                "operationId": "c812310d4445dcc8a62a421f45511b54",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "floor",
+                                    "signagetitle",
+                                    "languageid"
+                                ],
+                                "properties": {
+                                    "floor": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "signagetitle": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "languageid": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/topmenuonsubmenuapi/{id}": {
+            "get": {
+                "tags": [
+                    "TopMenuOnSubMenuAPI"
+                ],
+                "summary": "Get TopMenuOnSubMenuAPI resources",
+                "operationId": "3999dacb6e1fbaa4bb0c88dc28c7521d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "TopMenuOnSubMenuAPI"
+                ],
+                "summary": "Update a TopMenuOnSubMenuAPI resource",
+                "operationId": "3eac3531181eb5b76672f2e741c23584",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resource updated"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "TopMenuOnSubMenuAPI"
+                ],
+                "summary": "Delete a TopMenuOnSubMenuAPI resource",
+                "operationId": "325de39d532bf05f2722382a28bb1e11",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Resource deleted"
+                    }
+                }
+            }
+        },
+        "/api/topmenuonsubmenuapi": {
+            "post": {
+                "tags": [
+                    "TopMenuOnSubMenuAPI"
+                ],
+                "summary": "Get TopMenuOnSubMenuAPI resource",
+                "operationId": "af9a99fd737b0712479541edc53b9a78",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "field1",
+                                    "field2",
+                                    "field3"
+                                ],
+                                "properties": {
+                                    "field1": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "field2": {
+                                        "type": "string",
+                                        "example": 1
+                                    },
+                                    "field3": {
+                                        "type": "string",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created"
+                    }
+                }
+            }
+        },
+        "/api/keysearch": {
+            "post": {
+                "tags": [
+                    "KeySearch"
+                ],
+                "summary": "Create KeySearch resource",
+                "operationId": "de01c272ebd509faf03e735fa51c6ab2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "InputSearch",
+                                    "DirectLink",
+                                     "DeviceCode"
+                                ],
+                                "properties": {
+                                    "InputSearch": {
+                                        "type": "string",
+                                        "example": "search term"
+                                    },
+                                    "DirectLink": {
+                                        "type": "string",
+                                        "example": "http://example.com"
+                                    },
+                                    "DeviceCode": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "KeySearch created successfully"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "MapItem": {
+                "title": "Map Item",
+                "description": "Map Item model",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "floor": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Room A101"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Meeting Room"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Event",
+            "description": "API for Event"
+        },
+        {
+            "name": "GroupFunctionDevice",
+            "description": "API for GroupFunctionDevice"
+        },
+        {
+            "name": "KeySearch",
+            "description": "API for KeySearch"
+        },
+        {
+            "name": "GroupSearchMapItem",
+            "description": "API for GroupSearchMapItem"
+        },
+        {
+            "name": "ItemDescription",
+            "description": "API for ItemDescription"
+        },
+        {
+            "name": "Map Items",
+            "description": "API for Map Item"
+        },
+        {
+            "name": "RouteMapItemDetail",
+            "description": "API for RouteMapItemDetail"
+        },
+        {
+            "name": "Signage",
+            "description": "API for Signage"
+        },
+        {
+            "name": "SignageDeviceTouch",
+            "description": "API for SignageDeviceTouch"
+        },
+        {
+            "name": "SignageMapItem",
+            "description": "API for SignageMapItem"
+        },
+        {
+            "name": "TopMenuOnSubMenuAPI",
+            "description": "API for TopMenuOnSubMenuAPI"
+        },
+        {
+            "name": "GroupMainFunction",
+            "description": "GroupMainFunction"
+        }
+    ]
+}
