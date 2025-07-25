@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Livewire\Map\DeviceTouchScreen;
+
+use App\Traits\LogsMapActivity;
 use App\Models\Map\DeviceTouchScreen;
 use App\Models\Map\T2Location;
 use Livewire\Component;
@@ -8,7 +10,9 @@ use Livewire\Component;
 class DeviceTouchScreenAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $device_touch_screen = ['Status' => 2];
     public $t2location;
 
@@ -40,6 +44,8 @@ class DeviceTouchScreenAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Device Touch Screen Add Page');
+
 
     }
 
@@ -52,6 +58,8 @@ class DeviceTouchScreenAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Device Touch Screen Add');
+
         
         $this->validate();
         //dd('save');

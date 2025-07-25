@@ -7,6 +7,42 @@ function connect_businesses_log($log)
     file_put_contents(base_path() . '/storage/logs/connect_businesses_log.log', date("r") . ":\n" . $log . "\n---\n", FILE_APPEND);
 }
 
+// Map Activity Logging Functions cho Map components
+if (!function_exists('map_log_create')) {
+    function map_log_create($module, $model_id = null, $data = [])
+    {
+        \App\Services\UserActivityLogger::logMapCreate($module, $model_id, $data);
+    }
+}
+
+if (!function_exists('map_log_update')) {
+    function map_log_update($module, $model_id = null, $data = [])
+    {
+        \App\Services\UserActivityLogger::logMapUpdate($module, $model_id, $data);
+    }
+}
+
+if (!function_exists('map_log_delete')) {
+    function map_log_delete($module, $model_id = null, $data = [])
+    {
+        \App\Services\UserActivityLogger::logMapDelete($module, $model_id, $data);
+    }
+}
+
+if (!function_exists('map_log_view')) {
+    function map_log_view($module, $page = '', $data = [])
+    {
+        \App\Services\UserActivityLogger::logMapView($module, $page, $data);
+    }
+}
+
+if (!function_exists('map_log_custom')) {
+    function map_log_custom($action, $module, $description, $data = [])
+    {
+        \App\Services\UserActivityLogger::logMapAction($action, $module, $description, $data);
+    }
+}
+
 if (!function_exists('guarded_route')) {
     /**
      * Generate a route or URL based on the user's guard.

@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Livewire\Map\ItemType;
+
+use App\Traits\LogsMapActivity;
 use App\Models\Map\ItemType;
 use Livewire\Component;
 
 class ItemTypeDetailLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $item_type;
     public $item_type_id;
     public function rules()
@@ -34,6 +38,8 @@ class ItemTypeDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Item Type Detail Page');
+
         $this->item_type_id = $id;
         $obj_item_type = new ItemType();
         $this->item_type = $obj_item_type->getItemTypeById($id);
@@ -46,6 +52,8 @@ class ItemTypeDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Item Type Detail');
+
 
         $this->validate();
         // dd($this->item_type);
@@ -59,7 +67,9 @@ class ItemTypeDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Item Type Detail');
+   
         $this->item_type->Status = DELETED_FLG;
         $obj_item_type = new ItemType();
         $obj_item_type->deleteItemType(

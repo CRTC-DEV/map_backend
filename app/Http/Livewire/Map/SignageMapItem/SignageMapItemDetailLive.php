@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\SignageMapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\SignageMapItem;
 use App\Models\Map\DeviceTouchScreen;
 use App\Models\Map\Signages;
@@ -14,7 +16,7 @@ use App\Models\Map\T2Location;
 
 class SignageMapItemDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $signage_id;
@@ -45,6 +47,8 @@ class SignageMapItemDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Signage Map Item Detail Page');
+
         [$this->signage_id, $this->mapitem_id] = explode(",", $id);
 
         $this->SignageMapItem = SignageMapItem::where('SignageId', $this->signage_id)
@@ -69,6 +73,8 @@ class SignageMapItemDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Signage Map Item Detail');
+
         $this->validate();
        
         DB::beginTransaction();
@@ -98,6 +104,8 @@ class SignageMapItemDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Signage Map Item Detail');
+
         DB::beginTransaction();
 
         try {

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\ItemDescription;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemDescription;
 use App\Models\TextContent;
 use Livewire\Component;
@@ -9,7 +11,9 @@ use Livewire\Component;
 class ItemDescriptionDetailLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $item_description;
     public $item_description_id;
     public $text_content;
@@ -33,6 +37,8 @@ class ItemDescriptionDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Item Description Detail Page');
+
         $this->item_description_id = $id;
         $obj_item_description = new ItemDescription();
         $this->item_description = $obj_item_description->getItemById($id);
@@ -47,6 +53,8 @@ class ItemDescriptionDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Item Description Detail');
+
         // dd($this->item_description);
         $this->validate();
         
@@ -59,7 +67,9 @@ class ItemDescriptionDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Item Description Detail');
+   
         $this->item_description->Status = DELETED_FLG;
         $obj_item_description = new ItemDescription();
         $obj_item_description->deleteItem( $this->item_description_id);

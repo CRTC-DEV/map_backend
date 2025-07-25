@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\GroupSearch;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\GroupSearch;
 use Livewire\Component;
 use App\Models\ItemTitle;
@@ -9,7 +11,9 @@ use App\Models\ItemTitle;
 class GroupSearchDetailLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $group_search;
     public $group_search_id;
     public $item_title;
@@ -37,6 +41,8 @@ class GroupSearchDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Group Search Detail Page');
+
         $this->group_search_id = $id;
         $obj_group_search = new GroupSearch();
         $this->group_search = $obj_group_search->getItemById($id);
@@ -52,6 +58,8 @@ class GroupSearchDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Group Search Detail');
+
 
         $this->validate();
         // dd($this->group_search);
@@ -65,7 +73,9 @@ class GroupSearchDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Group Search Detail');
+   
        
         $obj_group_search = new GroupSearch();
         $obj_group_search->deleteItem($this->group_search_id);        

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\SignageMapItem;
 
+use App\Traits\LogsMapActivity;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Map\SignageMapItem;
 use App\Models\Map\MapItem;
@@ -13,7 +15,7 @@ use Livewire\WithFileUploads;
 
 class SignageMapItemAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $SignageMapItem = ['Status' => 2];
     public $Signage;
@@ -44,6 +46,8 @@ class SignageMapItemAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Signage Map Item Add Page');
+
         
     }
 
@@ -61,6 +65,8 @@ class SignageMapItemAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Signage Map Item Add');
+
 
         $this->validate();
         DB::beginTransaction();

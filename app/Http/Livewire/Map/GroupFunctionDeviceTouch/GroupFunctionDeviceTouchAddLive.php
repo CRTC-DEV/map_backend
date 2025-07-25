@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\GroupFunctionDeviceTouch;
 
+use App\Traits\LogsMapActivity;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Map\GroupFunctionDeviceTouch;
 use App\Models\Map\DeviceTouchScreen;
@@ -11,7 +13,7 @@ use Livewire\WithFileUploads;
 
 class GroupFunctionDeviceTouchAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $GroupFunctionDeviceTouch = ['Status' => 2];
     public $GroupFunction;
@@ -44,6 +46,8 @@ class GroupFunctionDeviceTouchAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Group Function Device Touch Add Page');
+
         $this->available_deviceTouchScreens = (new DeviceTouchScreen())->getAllDeviceTouchScreens();
         $this->available_groupfunctions = (new GroupFunction())->getAllGroupFunctions();
 
@@ -58,6 +62,8 @@ class GroupFunctionDeviceTouchAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Group Function Device Touch Add');
+
 
         $this->validate();
         DB::beginTransaction();

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\SignageDeviceTouch;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\SignageDeviceTouch;
 use App\Models\Map\DeviceTouchScreen;
 use App\Models\Map\Signages;
@@ -13,7 +15,7 @@ use App\Models\Map\T2Location;
 
 class SignageDeviceTouchDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $signage_id;
@@ -59,6 +61,8 @@ class SignageDeviceTouchDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Signage Device Touch Detail Page');
+
         [$this->signage_id, $this->device_touch_screens_id] = explode(",", $id);
 
         
@@ -85,6 +89,8 @@ class SignageDeviceTouchDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Signage Device Touch Detail');
+
         $this->validate();
         // DB::listen(function ($query) {
         //     \Log::info($query->sql, $query->bindings);
@@ -143,6 +149,8 @@ class SignageDeviceTouchDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Signage Device Touch Detail');
+
         DB::beginTransaction();
 
         try {

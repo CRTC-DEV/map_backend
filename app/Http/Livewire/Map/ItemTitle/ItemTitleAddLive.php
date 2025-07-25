@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\ItemTitle;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemTitle;
 use App\Models\Map\MapItem;
 use App\Models\TextContent;
@@ -10,7 +12,9 @@ use Livewire\Component;
 class ItemTitleAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $item_title = ['Status' => 2,'IsShow'=>1];   
     public $textcontent;
 
@@ -32,6 +36,8 @@ class ItemTitleAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Item Title Add Page');
+
 
     }
 
@@ -44,6 +50,8 @@ class ItemTitleAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Item Title Add');
+
         
         $this->validate();
         //dd($this->item_title);

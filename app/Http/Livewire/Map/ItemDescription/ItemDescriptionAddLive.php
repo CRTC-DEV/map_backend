@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\ItemDescription;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemDescription;
 use App\Models\Map\RouteMapItem;
 use App\Models\TextContent;
@@ -10,7 +12,9 @@ use Livewire\Component;
 class ItemDescriptionAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $item_description = ['Status' => 2];   
     public $text_content;
 
@@ -31,6 +35,8 @@ class ItemDescriptionAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Item Description Add Page');
+
 
     }
 
@@ -43,6 +49,8 @@ class ItemDescriptionAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Item Description Add');
+
         
         $this->validate();
         //dd($this->item_description);

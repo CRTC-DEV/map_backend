@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\FaqType;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\FaqType;
 use App\Models\ItemTitle;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +12,7 @@ use Livewire\WithFileUploads;
 
 class FaqTypeDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $faq_type_id;
@@ -34,6 +36,8 @@ class FaqTypeDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Faq Type Detail Page');
+
 
         $this->faq_type_id = (int) $id;
         $this->FaqType = FaqType::findOrFail($this->faq_type_id)->toArray();
@@ -49,6 +53,8 @@ class FaqTypeDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Faq Type Detail');
+
         $this->validate();
         // dd('Validation passed');
         DB::beginTransaction();
@@ -76,6 +82,8 @@ class FaqTypeDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Faq Type Detail');
+
         DB::beginTransaction();
 
         try {

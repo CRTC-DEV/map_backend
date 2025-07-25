@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\ContactNumber;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\ContactNumber;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -9,7 +11,7 @@ use App\Models\Map\ContactNumberType;
 
 class ContactNumberDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $contact_number_id;
@@ -35,6 +37,8 @@ class ContactNumberDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Contact Number Detail Page');
+
 
         $this->contact_number_id = (int) $id;
         $this->ContactNumber = ContactNumber::findOrFail($this->contact_number_id)->toArray();
@@ -51,6 +55,8 @@ class ContactNumberDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Contact Number Detail');
+
         $this->validate();
         // dd('Validation passed');
         DB::beginTransaction();
@@ -81,6 +87,8 @@ class ContactNumberDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Contact Number Detail');
+
         DB::beginTransaction();
 
         try {

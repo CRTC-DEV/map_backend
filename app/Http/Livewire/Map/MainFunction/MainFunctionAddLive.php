@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\MainFunction;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\ItemType;
 use Illuminate\Support\Facades\DB;
 use App\Models\ItemTitle;
@@ -11,7 +13,7 @@ use App\Models\Map\Signages;
 
 class MainFunctionAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $mainfunction=['Status' => ENABLE];    
     public $item_title;

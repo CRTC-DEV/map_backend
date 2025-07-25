@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire\Map\Languages;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Languages;
 use Livewire\Component;
 
 class LanguagesDetailLive extends Component
 {
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $languages;
     public $languages_id;
     public function rules()
@@ -30,6 +34,8 @@ class LanguagesDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Languages Detail Page');
+
         $this->languages_id = $id;
         $obj_languages = new Languages();
         $this->languages = $obj_languages->getLanguageById($id);
@@ -42,6 +48,8 @@ class LanguagesDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Languages Detail');
+
         // dd($this->map_item);
         $this->validate();
         
@@ -55,7 +63,9 @@ class LanguagesDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Languages Detail');
+   
         $this->languages->Status = DELETED_FLG;
         $obj_languages = new Languages();
         $obj_languages->deleteLanguage(

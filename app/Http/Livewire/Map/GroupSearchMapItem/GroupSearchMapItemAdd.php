@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\GroupSearchMapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\GroupSearchMapItem;
 use App\Models\Map\GroupSearch;
 use App\Models\Map\MapItem;
@@ -9,7 +11,9 @@ use Livewire\Component;
 
 class GroupSearchMapItemAdd extends Component
 {
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $group_search_map_item = ['Status' => 2, 'IsShowBothLocation' => 0, 'IsSearchAllFloor' => 0];
     public $item_title;
     public $group_search;
@@ -46,6 +50,8 @@ class GroupSearchMapItemAdd extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Group Search Map Item Add Page');
+
         $this->loadMapItems();
     }
 
@@ -79,6 +85,8 @@ class GroupSearchMapItemAdd extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Group Search Map Item');
+
         $this->validate();
 
         $obj_group_search = new GroupSearchMapItem();

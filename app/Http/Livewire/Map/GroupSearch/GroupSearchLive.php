@@ -2,17 +2,23 @@
 
 namespace App\Http\Livewire\Map\GroupSearch;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\GroupSearch;
 use Livewire\Component;
 use App\Models\ItemTitle;
 
 class GroupSearchLive extends Component
 {
-    public $item_type;
+    
+    use LogsMapActivity;
+public $item_type;
     public $group_search;
     public $item_title;
 
     public function mount(){
+        $this->logMapPageView('Group Search Page');
+
         // $obj_item = new ItemDescription();
         $obj_group_searchs= new GroupSearch();
         $this->group_search = $obj_group_searchs->getAllItems();

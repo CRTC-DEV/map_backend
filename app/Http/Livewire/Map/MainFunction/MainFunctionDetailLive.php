@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\MainFunction;
 
+use App\Traits\LogsMapActivity;
+
 
 use App\Models\Map\ItemType;
 use App\Models\ItemTitle;
@@ -13,7 +15,7 @@ use App\Models\Map\Signages;
 
 class MainFunctionDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $function_id;
@@ -43,6 +45,8 @@ class MainFunctionDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Main Function Detail Page');
+
 
         $this->function_id = $id;
         $this->mainfunction = MainFunction::findOrFail($this->function_id)->toArray();
@@ -69,6 +73,8 @@ class MainFunctionDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Main Function Detail');
+
         $this->validate();
         // dd($this->Function);
         DB::beginTransaction();
@@ -97,6 +103,8 @@ class MainFunctionDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Main Function Detail');
+
         DB::beginTransaction();
 
         try {

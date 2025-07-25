@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\Signage;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\ItemType;
 use Illuminate\Support\Facades\DB;
 use App\Models\ItemTitle;
@@ -10,7 +12,7 @@ use Livewire\WithFileUploads;
 
 class SignageAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $Signage=['Status' => 2];
     public $Screen;
@@ -45,6 +47,8 @@ class SignageAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Signage Add Page');
+
 
     }
 
@@ -64,6 +68,8 @@ class SignageAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Signage Add');
+
         $this->validate();
         DB::beginTransaction();
 

@@ -2,13 +2,19 @@
 
 namespace App\Http\Livewire\Map\TextContent;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\TextContent;
 use Livewire\Component;
 
 class TextContentListLive extends Component
 {
-    public $text_content;
+    
+    use LogsMapActivity;
+public $text_content;
     public function mount(){
+        $this->logMapPageView('Text Content List-20250715033846.581 Page');
+
         // $obj_item = new ItemTitle();
         $obj_text_content= new TextContent();
         $this->text_content = $obj_text_content->getAllTextContentWithLanguages();

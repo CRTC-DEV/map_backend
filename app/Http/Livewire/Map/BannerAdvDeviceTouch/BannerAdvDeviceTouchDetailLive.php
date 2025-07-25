@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\BannerAdvDeviceTouch;
 
+use App\Traits\LogsMapActivity;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Map\BannerAdvDeviceTouch;
 use App\Models\Map\BannerAdv;
@@ -11,7 +13,9 @@ use Livewire\Component;
 class BannerAdvDeviceTouchDetailLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
    
     //public $group_search;
     public $banner_adv_device_touch=['Status'=>'2'] ;
@@ -38,6 +42,8 @@ class BannerAdvDeviceTouchDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Banner Adv Device Touch Detail Page');
+
         [$this->banneradv_id, $this->device_touch_id] = explode(",", $id);
 
         $obj= new BannerAdvDeviceTouch();
@@ -59,6 +65,8 @@ class BannerAdvDeviceTouchDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Banner Adv Device Touch Detail');
+
         
         
         $this->validate();       
@@ -71,6 +79,8 @@ class BannerAdvDeviceTouchDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Banner Adv Device Touch Detail');
+
         DB::beginTransaction();
 
         try {

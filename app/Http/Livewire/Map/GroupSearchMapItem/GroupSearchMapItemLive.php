@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\GroupSearchMapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\GroupSearch;
 use App\Models\Map\GroupSearchMapItem;
 use Livewire\Component;
@@ -10,7 +12,7 @@ use Livewire\WithPagination;
 
 class GroupSearchMapItemLive extends Component
 {
-    use WithPagination;
+    use WithPagination, LogsMapActivity;
     
     public $group_search;
     public $search;
@@ -23,6 +25,8 @@ class GroupSearchMapItemLive extends Component
     {
         // Initialize per_page if not set
         if (!$this->per_page) {
+        $this->logMapPageView('Group Search Map Item Page');
+
             $this->per_page = 10;
         }
     }

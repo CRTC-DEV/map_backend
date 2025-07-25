@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\ItemType;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemTitle;
 use App\Models\Map\ItemType;
 use Livewire\Component;
@@ -9,7 +11,9 @@ use Livewire\Component;
 class ItemTypeAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $item_type = ['Status' => 2,'IsShow' =>1];
 
     public function rules()
@@ -33,6 +37,8 @@ class ItemTypeAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Item Type Add Page');
+
 
     }
 
@@ -43,6 +49,8 @@ class ItemTypeAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Item Type Add');
+
         
         $this->validate();
 
