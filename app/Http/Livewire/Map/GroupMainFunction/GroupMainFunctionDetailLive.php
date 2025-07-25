@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\GroupMainFunction;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\GroupMainFunction;
 use App\Models\Map\MainFunction;
 use App\Models\Map\GroupFunction;
@@ -13,7 +15,7 @@ use App\Models\Map\T2Location;
 
 class GroupMainFunctionDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $groupfunction_id;
@@ -42,6 +44,8 @@ class GroupMainFunctionDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Group Main Function Detail Page');
+
         [$this->groupfunction_id, $this->main_function_id] = explode(",", $id);
 
         $this->GroupMainFunction = GroupMainFunction::where('GroupFunctionId', $this->groupfunction_id)
@@ -62,6 +66,8 @@ class GroupMainFunctionDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Group Main Function Detail');
+
         $this->validate();
         // dd($this->MainFunction);
         DB::beginTransaction();
@@ -98,6 +104,8 @@ class GroupMainFunctionDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Group Main Function Detail');
+
         DB::beginTransaction();
 
         try {

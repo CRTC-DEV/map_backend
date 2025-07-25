@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\GroupFunction;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\ItemType;
 use Illuminate\Support\Facades\DB;
 use App\Models\ItemTitle;
@@ -10,7 +12,7 @@ use Livewire\WithFileUploads;
 
 class GroupFunctionAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $GroupFunction=['Status' => ENABLE];
     public $Screen;
@@ -40,6 +42,8 @@ class GroupFunctionAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Group Function Add Page');
+
         // dd($this->title_text);
     }
 
@@ -58,6 +62,8 @@ class GroupFunctionAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Group Function Add');
+
         $this->validate();
 
         DB::beginTransaction();

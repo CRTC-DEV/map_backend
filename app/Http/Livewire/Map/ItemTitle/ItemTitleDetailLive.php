@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\ItemTitle;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemTitle;
 use App\Models\TextContent;
 use App\Models\Map\MapItem;
@@ -10,7 +12,9 @@ use Livewire\Component;
 class ItemTitleDetailLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $item_title;
     public $item_title_id;
     public $textcontent;
@@ -37,6 +41,8 @@ class ItemTitleDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Item Title Detail Page');
+
         $this->item_title_id = $id;
         $obj_item_title = new ItemTitle();
         $this->item_title = $obj_item_title->getItemById($id);
@@ -51,6 +57,8 @@ class ItemTitleDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Item Title Detail');
+
         // dd($this->item_title);
         $this->validate();
         
@@ -63,7 +71,9 @@ class ItemTitleDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Item Title Detail');
+   
         if ($this->item_title) {
             $this->item_title->Status = DELETED_FLG;
             $obj_item_title = new ItemTitle();

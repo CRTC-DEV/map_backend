@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\Faq;
 
+use App\Traits\LogsMapActivity;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\ItemTitle;
 use App\Models\Map\Faq;
@@ -11,7 +13,7 @@ use Livewire\WithFileUploads;
 
 class FaqAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $Faq=['Status' => 2];
     public $item_title;
@@ -40,6 +42,8 @@ class FaqAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Faq Add Page');
+
 
     }
 
@@ -60,6 +64,8 @@ class FaqAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Faq Add');
+
         $this->validate();
         // dd($this->Faq);
         DB::beginTransaction();

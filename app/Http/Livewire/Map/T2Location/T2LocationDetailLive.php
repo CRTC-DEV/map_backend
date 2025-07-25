@@ -2,12 +2,16 @@
 
 namespace App\Http\Livewire\Map\T2Location;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\T2Location;
 use Livewire\Component;
 
 class T2LocationDetailLive extends Component
 {
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $t2_location;
     public $t2_location_id;
     public function rules()
@@ -30,6 +34,8 @@ class T2LocationDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('T2 Location Detail Page');
+
         $this->t2_location_id = $id;
         $obj_t2_location = new T2Location();
         $this->t2_location = $obj_t2_location->getT2LocationById($id);
@@ -42,6 +48,8 @@ class T2LocationDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'T2 Location Detail');
+
         // dd($this->map_item);
         $this->validate();
         
@@ -55,7 +63,9 @@ class T2LocationDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'T2 Location Detail');
+   
         $this->t2_location->Status = DELETED_FLG;
         $obj_t2_location = new T2Location();
         $obj_t2_location->deleteT2Location(

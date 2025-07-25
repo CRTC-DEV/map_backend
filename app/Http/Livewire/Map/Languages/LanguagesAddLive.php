@@ -2,13 +2,17 @@
 
 namespace App\Http\Livewire\Map\Languages;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Languages;
 use Livewire\Component;
 
 class LanguagesAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $languages;
 
     public function rules()
@@ -28,6 +32,8 @@ class LanguagesAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Languages Add Page');
+
 
     }
 
@@ -37,6 +43,8 @@ class LanguagesAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Languages Add');
+
         
         $this->validate();
         // dd($this->item_title);

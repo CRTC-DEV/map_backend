@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\BannerAdv;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\BannerAdv;
 use Livewire\Component;
 use App\Models\ItemTitle;
@@ -13,7 +15,7 @@ use Livewire\WithFileUploads;
 class BannerAdvDetailLive extends Component
 {
 
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $banner_adv;
     public $banner_adv_id;
@@ -48,6 +50,8 @@ class BannerAdvDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Banner Adv Detail Page');
+
         $this->banner_adv_id = $id;
         //dd($this->banner_adv);
         // $this->banner_adv = BannerAdv::find($id);
@@ -74,6 +78,8 @@ class BannerAdvDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Banner Adv Detail');
+
         $this->validate();
         $this->banner_adv['IsVideo'] = $this->IsVideo;
 
@@ -119,6 +125,8 @@ class BannerAdvDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Banner Adv Detail');
+
 
         $obj_banner_adv = new BannerAdv();
         $obj_banner_adv->deletdBannerAdv($this->banner_adv, $this->banner_adv_id);

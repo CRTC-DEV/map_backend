@@ -2,13 +2,19 @@
 
 namespace App\Http\Livewire\Map\AdminManagement;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\User;
 use Livewire\Component;
 
 class AdminManagement extends Component
 {
-    public $users;
+    
+    use LogsMapActivity;
+public $users;
     public function mount(){
+        $this->logMapPageView('Admin Management Page');
+
         // $obj_item = new ItemTitle();
         $obj_user= new User();
         $this->users = $obj_user->getAllUser();

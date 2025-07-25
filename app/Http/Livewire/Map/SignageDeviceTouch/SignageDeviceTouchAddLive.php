@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\SignageDeviceTouch;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\MapItem;
 use Illuminate\Support\Facades\DB;
 use App\Models\Map\SignageDeviceTouch;
@@ -14,7 +16,7 @@ use Livewire\WithFileUploads;
 
 class SignageDeviceTouchAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $SignageDeviceTouch = ['Status' => 2];
     public $Signage;
@@ -76,6 +78,8 @@ class SignageDeviceTouchAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Signage Device Touch Add Page');
+
         $this->available_deviceTouchScreens = (new DeviceTouchScreen())->getAllDeviceTouchScreens();
         $this->available_signages = (new Signages())->getAllSignages();
         
@@ -96,6 +100,8 @@ class SignageDeviceTouchAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Signage Device Touch Add');
+
 
         $this->validate();
         DB::beginTransaction();

@@ -2,14 +2,20 @@
 
 namespace App\Http\Livewire\Map\ItemTitle;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemTitle;
 use App\Models\Map\MapItem;
 use Livewire\Component;
 
 class ItemTitleLive extends Component
 {
-    public $item_title;
+    
+    use LogsMapActivity;
+public $item_title;
     public function mount(){
+        $this->logMapPageView('Item Title Page');
+
         // $obj_item = new ItemTitle();
         $obj_map_items= new ItemTitle();
         $this->item_title = $obj_map_items->getAllItems();

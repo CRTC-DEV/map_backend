@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\BannerAdvDeviceTouch;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\BannerAdvDeviceTouch;
 use App\Models\Map\BannerAdv;
 use App\Models\Map\DeviceTouchScreen;
@@ -10,7 +12,9 @@ use Livewire\Component;
 class BannerAdvDeviceTouchAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
    
     //public $group_search;
     public $banner_adv_device_touch=['Status'=>'2'] ;
@@ -35,6 +39,8 @@ class BannerAdvDeviceTouchAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Banner Adv Device Touch Add Page');
+
         
     }
 
@@ -51,6 +57,8 @@ class BannerAdvDeviceTouchAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Banner Adv Device Touch Add');
+
         
         
         $this->validate();       

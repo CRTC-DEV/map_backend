@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\TextContent;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Languages;
 use App\Models\TextContent;
 use Livewire\Component;
@@ -9,7 +11,9 @@ use Livewire\Component;
 class TextContentAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $text_content;
     public $languages;
     public function rules()
@@ -31,6 +35,8 @@ class TextContentAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Text Content Add Page');
+
 
     }
 
@@ -42,6 +48,8 @@ class TextContentAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Text Content Add');
+
         
         $this->validate();
         // dd($this->item_title);

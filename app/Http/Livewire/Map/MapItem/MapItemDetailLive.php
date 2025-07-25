@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\MapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemTitle;
 use App\Models\Languages;
 use App\Models\Map\MapItem;
@@ -18,7 +20,7 @@ use Livewire\Component;
 
 class MapItemDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $language;
@@ -79,6 +81,8 @@ class MapItemDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Map Item Detail Page');
+
         $this->map_item_id = $id;
     }
 
@@ -113,6 +117,8 @@ class MapItemDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Map Item Detail');
+
         $this->validate();
 
         $this->map_item['UserId'] = auth()->guard('admin')->check() ? ROLE_ADMIN_WEBSITE : (auth()->guard('user')->check() ? ROLE_ADMIN_MAP : null);
@@ -136,6 +142,8 @@ class MapItemDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Map Item Detail');
+
         $this->map_item->Status = DELETED_FLG;
         $obj_map_item = new MapItem();
         $obj_map_item->deleteMapItem(

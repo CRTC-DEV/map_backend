@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\AdminManagement;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\User;
 use App\Models\Role;
 use Livewire\Component;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminManagementDetail extends Component
 {
-    use WithPagination;
+    use WithPagination, LogsMapActivity;
     use WithFileUploads;
 
     public $user;
@@ -41,6 +43,8 @@ class AdminManagementDetail extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Admin Management Detail Page');
+
         $this->user = User::find($id);
          $this->role = Role::all();
     }
@@ -52,6 +56,8 @@ class AdminManagementDetail extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Admin Management');
+
         $this->validate();
         // dd($this->user);
         $obj_user  = new User();

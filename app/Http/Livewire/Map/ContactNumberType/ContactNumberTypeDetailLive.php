@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\ContactNumberType;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\ContactNumberType;
 use App\Models\ItemTitle;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +12,7 @@ use Livewire\WithFileUploads;
 
 class ContactNumberTypeDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $contact_number_type_id;
@@ -34,6 +36,8 @@ class ContactNumberTypeDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Contact Number Type Detail Page');
+
 
         $this->contact_number_type_id = (int) $id;
         $this->ContactNumberType = ContactNumberType::findOrFail($this->contact_number_type_id)->toArray();
@@ -49,6 +53,8 @@ class ContactNumberTypeDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Contact Number Type Detail');
+
         $this->validate();
         // dd('Validation passed');
         DB::beginTransaction();
@@ -76,6 +82,8 @@ class ContactNumberTypeDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Contact Number Type Detail');
+
         DB::beginTransaction();
 
         try {

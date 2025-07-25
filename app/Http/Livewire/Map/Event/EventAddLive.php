@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\Event;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\ItemType;
 use Illuminate\Support\Facades\DB;
 use App\Models\ItemTitle;
@@ -14,7 +16,7 @@ use App\Models\Map\GroupSearch;
 
 class EventAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     public $message;
     public $Event=['Status' => 2];
     public $item_title;
@@ -54,6 +56,8 @@ class EventAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Event Add Page');
+
 
     }
 
@@ -84,6 +88,8 @@ class EventAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Event Add');
+
         $this->validate();
         // dd($this->Event);
         DB::beginTransaction();

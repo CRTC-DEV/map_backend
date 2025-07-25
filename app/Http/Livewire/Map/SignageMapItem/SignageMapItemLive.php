@@ -2,15 +2,21 @@
 
 namespace App\Http\Livewire\Map\SignageMapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\SignageMapItem;
 use Livewire\Component;
 
 class SignageMapItemLive extends Component
 {
-    public $item_type;
+    
+    use LogsMapActivity;
+public $item_type;
     public $signage_mapitem;
     public $item_title;
     public function mount(){
+        $this->logMapPageView('Signage Map Item Page');
+
         
         $obj_signage_mapitem= new SignageMapItem();
         $this->signage_mapitem = $obj_signage_mapitem->getAllSignageMapItem();

@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\BannerAdv;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\BannerAdv;
 use App\Models\ItemDescription;
 use App\Models\ItemTitle;
@@ -10,7 +12,7 @@ use Livewire\WithFileUploads;
 
 class BannerAdvAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     protected $listeners = ['setMediaType'];
     public $message;
     public $banner_adv = ['Status' => 2];
@@ -51,6 +53,8 @@ class BannerAdvAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Banner Adv Add Page');
+
         // $this->banner_adv['banner_adv.IsVideo'] = $this->IsVideo;
         //use only for load page, not refresh data
         //$this->item_title = ItemTitle::where('Status', '!=', DELETED_FLG)->get();
@@ -72,6 +76,8 @@ class BannerAdvAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Banner Adv Add');
+
         // dd($this->banner_adv,$this->IsVideo);
         $this->validate();
         $this->banner_adv['IsVideo'] = $this->IsVideo;

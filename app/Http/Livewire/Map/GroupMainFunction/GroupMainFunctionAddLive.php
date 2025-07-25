@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\GroupMainFunction;
 
+use App\Traits\LogsMapActivity;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Map\GroupMainFunction;
 use App\Models\Map\MainFunction;
@@ -10,7 +12,9 @@ use Livewire\Component;
 
 class GroupMainFunctionAddLive extends Component
 {    
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $GroupMainFunction = [
         'Status' => ENABLE,
         'IsShowBothLocation' => 0,
@@ -44,6 +48,8 @@ class GroupMainFunctionAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Group Main Function Add Page');
+
         $this->available_mainfunction = (new MainFunction())->getAllFunction();
         $this->available_groupfunctions = (new GroupFunction())->getAllGroupFunctions();
 
@@ -58,6 +64,8 @@ class GroupMainFunctionAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Group Main Function Add');
+
 
         $this->validate();
         DB::beginTransaction();

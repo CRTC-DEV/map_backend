@@ -2,13 +2,19 @@
 
 namespace App\Http\Livewire\Map\T2Location;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\T2Location;
 use Livewire\Component;
 
 class T2LocationListLive extends Component
 {
-    public $t2_location;
+    
+    use LogsMapActivity;
+public $t2_location;
     public function mount(){
+        $this->logMapPageView('T2 Location List Page');
+
         // $obj_item = new ItemTitle();
         $obj_t2_location= new T2Location();
         $this->t2_location = $obj_t2_location->getAllT2Location();

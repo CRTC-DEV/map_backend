@@ -2,16 +2,22 @@
 
 namespace App\Http\Livewire\Map\BannerAdv;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\BannerAdv;
 use Livewire\Component;
 use App\Models\ItemTitle;
 
 class BannerAdvLive extends Component
 {
-    public $item_type;
+    
+    use LogsMapActivity;
+public $item_type;
     public $banner_adv;
     public $item_title;
     public function mount(){
+        $this->logMapPageView('Banner Adv Page');
+
         // $obj_item = new ItemDescription();
         $obj_banner_advs= new BannerAdv();
         $this->banner_adv = $obj_banner_advs->getAllBannerAdv();

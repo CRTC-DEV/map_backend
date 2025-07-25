@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\Event;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\Event;
 use App\Models\Map\ItemType;
 use App\Models\ItemDescription;
@@ -14,7 +16,7 @@ use App\Models\Map\GroupSearch;
 
 class EventDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $event_id;
@@ -52,6 +54,8 @@ class EventDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Event Detail Page');
+
 
         $this->event_id = (int) $id;
         $this->Event = Event::findOrFail($this->event_id)->toArray();
@@ -80,6 +84,8 @@ class EventDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Event Detail');
+
         $this->validate();
         // dd('Validation passed');
         DB::beginTransaction();
@@ -118,6 +124,8 @@ class EventDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Event Detail');
+
         DB::beginTransaction();
 
         try {

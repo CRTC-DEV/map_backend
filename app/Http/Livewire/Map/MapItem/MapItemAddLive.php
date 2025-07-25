@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\MapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\ItemDescription;
 use App\Models\Languages;
 use App\Models\Translations;
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\DB;
 
 class MapItemAddLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
     
     public $showTranslationInput = false;
     public $showTranslationDescripton = false;
@@ -77,6 +79,8 @@ class MapItemAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Map Item Add Page');
+
         $this->title_text['OriginalLanguageId'] = 1;
         // dd($this->item_title);
     }
@@ -103,6 +107,8 @@ class MapItemAddLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Map Item Add');
+
         $this->validate();
         
         // Xử lý tải lên hình ảnh nếu có

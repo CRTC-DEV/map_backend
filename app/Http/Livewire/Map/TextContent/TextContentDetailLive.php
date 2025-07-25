@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\TextContent;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\TextContent;
 use App\Models\Languages;
 use Livewire\Component;
@@ -9,7 +11,9 @@ use Livewire\Component;
 
 class TextContentDetailLive extends Component
 {
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $text_content;
     public $text_content_id;
     public $languages;
@@ -32,6 +36,8 @@ class TextContentDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Text Content Detail Page');
+
         $this->text_content_id = $id;
         $obj_text_content = new TextContent();
         $this->text_content = $obj_text_content->getTextContentById($id);
@@ -46,6 +52,8 @@ class TextContentDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Text Content Detail');
+
         // dd($this->map_item);
         $this->validate();
         
@@ -59,7 +67,9 @@ class TextContentDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Text Content Detail');
+   
         $this->text_content->Status = DELETED_FLG;
         $obj_text_content = new TextContent();
         $obj_text_content->deleteTextContent(

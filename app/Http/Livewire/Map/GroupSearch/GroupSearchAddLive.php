@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Livewire\Map\GroupSearch;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\GroupSearch;
 use App\Models\ItemTitle;
 use Livewire\Component;
@@ -8,7 +10,9 @@ use Livewire\Component;
 class GroupSearchAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $group_search = ['Status' => 2];
     public $item_title;
 
@@ -35,6 +39,8 @@ class GroupSearchAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Group Search Add Page');
+
         //use only for load page, not refresh data
         //$this->item_title = ItemTitle::where('Status', '!=', DELETED_FLG)->get();
         
@@ -51,6 +57,8 @@ class GroupSearchAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Group Search Add');
+
         
         $this->validate();
 

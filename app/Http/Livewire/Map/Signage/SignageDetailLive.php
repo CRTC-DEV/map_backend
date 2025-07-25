@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\Signage;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Signage;
 use App\Models\Map\ItemType;
 use App\Models\Map\Signages;
@@ -13,7 +15,7 @@ use App\Models\Map\T2Location;
 
 class SignageDetailLive extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LogsMapActivity;
 
     public $message;
     public $signage_id;
@@ -44,6 +46,8 @@ class SignageDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Signage Detail Page');
+
 
         $this->signage_id = $id;
         $this->Signage = Signages::findOrFail($this->signage_id)->toArray();
@@ -62,6 +66,8 @@ class SignageDetailLive extends Component
 
     public function save()
     {
+        $this->logMapAttempt('SAVE', 'Signage Detail');
+
         $this->validate();
         // dd($this->Signage);
         DB::beginTransaction();
@@ -94,6 +100,8 @@ class SignageDetailLive extends Component
 
     public function delete()
     {
+        $this->logMapAttempt('DELETE', 'Signage Detail');
+
         DB::beginTransaction();
 
         try {

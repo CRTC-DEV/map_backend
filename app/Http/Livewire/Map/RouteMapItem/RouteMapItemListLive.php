@@ -2,13 +2,19 @@
 
 namespace App\Http\Livewire\Map\RouteMapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\RouteMapItem;
 use Livewire\Component;
 
 class RouteMapItemListLive extends Component
 {
-    public $group_search;
+    
+    use LogsMapActivity;
+public $group_search;
     public function mount(){
+        $this->logMapPageView('Route Map Item List Page');
+
         // $obj_item = new ItemTitle();
         $obj_group_search= new RouteMapItem();
         $this->group_search = $obj_group_search->getAllRouteMapItem();

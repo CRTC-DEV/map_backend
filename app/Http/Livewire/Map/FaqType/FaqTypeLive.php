@@ -2,15 +2,21 @@
 
 namespace App\Http\Livewire\Map\FaqType;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\FaqType;
 use Livewire\Component;
 
 class FaqTypeLive extends Component
 {
     
-    public $faq_type;
+    
+    use LogsMapActivity;
+public $faq_type;
     public $item_title;
     public function mount(){
+        $this->logMapPageView('Faq Type Page');
+
         // $obj_item = new ItemDescription();
         $obj_faq_type_device_touchs= new FaqType();
         $this->faq_type = $obj_faq_type_device_touchs->getAllFaqType();

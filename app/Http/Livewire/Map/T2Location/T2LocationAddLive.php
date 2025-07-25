@@ -2,13 +2,17 @@
 
 namespace App\Http\Livewire\Map\T2Location;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\T2Location;
 use Livewire\Component;
 
 class T2LocationAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $t2_location;
 
     public function rules()
@@ -31,6 +35,8 @@ class T2LocationAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('T2 Location Add Page');
+
 
     }
 
@@ -40,6 +46,8 @@ class T2LocationAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'T2 Location Add');
+
         
         $this->validate();
         // dd($this->item_title);

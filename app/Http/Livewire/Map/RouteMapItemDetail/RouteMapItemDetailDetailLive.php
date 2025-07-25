@@ -2,13 +2,17 @@
 
 namespace App\Http\Livewire\Map\RouteMapItemDetail;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\RouteMapItemDetail;
 use App\Models\Map\RouteMapItem;
 use Livewire\Component;
 
 class RouteMapItemDetailDetailLive extends Component
 {
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $route_map_item_detail;
     public $route_map_item_id;
     public $longitudes;
@@ -36,6 +40,8 @@ class RouteMapItemDetailDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Route Map Item Detail Detail Page');
+
         // $this->route_map_item_detail_id = $id;
         [$this->route_map_item_id, $this->longitudes, $this->latitudes] = explode(",", $id);
 
@@ -52,6 +58,8 @@ class RouteMapItemDetailDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Route Map Item Detail Detail');
+
         // dd($this->map_item);
         $this->validate();
         
@@ -65,7 +73,9 @@ class RouteMapItemDetailDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Route Map Item Detail Detail');
+   
         $this->route_map_item_detail->Status = DELETED_FLG;
         $obj_route_map_item_detail = new RouteMapItemDetail();
         $obj_route_map_item_detail->deleteRouteMapItemDetail(

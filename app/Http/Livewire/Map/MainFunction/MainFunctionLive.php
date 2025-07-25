@@ -2,15 +2,21 @@
 
 namespace App\Http\Livewire\Map\MainFunction;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\MainFunction;
 use Livewire\Component;
 
 class MainFunctionLive extends Component
 {
-    public $item_type;
+    
+    use LogsMapActivity;
+public $item_type;
     public $mainfunction;
     public $item_title;
     public function mount(){
+        $this->logMapPageView('Main Function Page');
+
         // $obj_item = new ItemDescription();
         $obj= new MainFunction();
         $this->mainfunction = $obj->getAllFunction();

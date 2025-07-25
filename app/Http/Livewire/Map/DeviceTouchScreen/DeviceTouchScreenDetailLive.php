@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Livewire\Map\DeviceTouchScreen;
+
+use App\Traits\LogsMapActivity;
 use App\Models\Map\DeviceTouchScreen;
 use App\Models\Map\T2Location;
 use Livewire\Component;
@@ -8,7 +10,9 @@ use Livewire\Component;
 class DeviceTouchScreenDetailLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $t2location;
     public $device_touch_screen;
     public $device_touch_screen_id;
@@ -38,6 +42,8 @@ class DeviceTouchScreenDetailLive extends Component
 
     public function mount($id)
     {
+        $this->logMapPageView('Device Touch Screen Detail Page');
+
         $this->device_touch_screen_id = $id;
         $obj_device_touch_screen = new DeviceTouchScreen();
         $this->device_touch_screen = $obj_device_touch_screen->getDeviceTouchScreenById($id);
@@ -52,6 +58,8 @@ class DeviceTouchScreenDetailLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Device Touch Screen Detail');
+
 
         $this->validate();
         // dd($this->device_touch_screen);
@@ -65,7 +73,9 @@ class DeviceTouchScreenDetailLive extends Component
     }
 
     public function delete()
-    {   
+    {
+        $this->logMapAttempt('DELETE', 'Device Touch Screen Detail');
+   
         $this->device_touch_screen->Status = DELETED_FLG;
         $obj_device_touch_screen = new DeviceTouchScreen();
         $obj_device_touch_screen->deleteDeviceTouchScreenById(

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Map\RouteMapItem;
 
+use App\Traits\LogsMapActivity;
+
 use App\Models\Map\MapItem;
 use App\Models\Map\RouteMapItem;
 use Livewire\Component;
@@ -9,7 +11,9 @@ use Livewire\Component;
 class RouteMapItemAddLive extends Component
 {
 
-    public $message;
+    
+    use LogsMapActivity;
+public $message;
     public $route_map_item;
     public $map_item;
 
@@ -32,6 +36,8 @@ class RouteMapItemAddLive extends Component
 
     public function mount()
     {
+        $this->logMapPageView('Route Map Item Add Page');
+
         
     }
 
@@ -44,6 +50,8 @@ class RouteMapItemAddLive extends Component
     }
 
     public function save(){
+        $this->logMapAttempt('SAVE', 'Route Map Item Add');
+
         
         $this->validate();
         // dd($this->item_title);
