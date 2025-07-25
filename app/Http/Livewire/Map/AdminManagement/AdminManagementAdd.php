@@ -1,0 +1,63 @@
+<?php
+
+namespace App\Http\Livewire\Map\AdminManagement;
+
+use App\Models\User;
+use App\Models\Menu;
+use Livewire\Component;
+
+use Illuminate\Http\Request;
+use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+
+class AdminManagementAdd extends Component
+{
+    use WithPagination;
+    use WithFileUploads;
+
+    public $user = [
+        'name' => null,
+        'email' => null,
+        'password_text' => null,
+        'role_id' => 3
+    ];
+    public function rules()
+    {
+        return [
+            'user.name' => 'required',
+            'user.email' => ['required', 'string', 'email', 'unique:users,email', 'max:255'],
+            'user.password_text' => 'required',
+            'user.role_id' => '',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+           
+        ];
+    }
+
+    public function mount()
+    {
+
+    }
+
+    public function render()
+    {
+        return view('livewire.map.admin-management.admin_management_add');
+    }
+
+    public function save()
+    {
+        $this->validate();
+        // dd($this->user);
+        $obj_user  = new User();
+        $obj_user->insertUser($this->user);
+
+        return redirect()->route('admin-management')->with(['message' => __('Insert completed'), 'status' => 'success']);
+    }
+
+}
