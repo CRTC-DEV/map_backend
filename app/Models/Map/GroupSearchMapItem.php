@@ -140,6 +140,7 @@ class GroupSearchMapItem extends Model
         $query = GroupSearchMapItem::where('GroupSearchMapItem.Status', '!=', DELETED_FLG)
             ->join('GroupSearch', 'GroupSearch.Id', '=', 'GroupSearchMapItem.GroupSearchId')
             ->join('MapItem', 'MapItem.Id', '=', 'GroupSearchMapItem.MapItemId')
+             ->where('MapItem.Status', '!=', DISABLE)
             ->join('T2Location', 'T2Location.Id', '=', 'MapItem.T2LocationId')
             ->join('ItemTitle', 'ItemTitle.Id', '=', 'MapItem.TitleId')
             ->join('TextContent as TitleText', 'TitleText.Id', '=', 'ItemTitle.TextcontentId')
@@ -174,6 +175,7 @@ class GroupSearchMapItem extends Model
             // Nếu có khoảng trắng, sử dụng toán tử =
             //$query->where('GroupSearch.KeySearch', '=', $keysearch);
             $query->where('GroupSearch.KeySearch', 'LIKE', '%' . $keysearch . '%');
+             
 
         } else {
            
@@ -209,6 +211,7 @@ class GroupSearchMapItem extends Model
         $query = GroupSearchMapItem::where('GroupSearchMapItem.Status', '!=', DELETED_FLG)
             ->join('GroupSearch', 'GroupSearch.Id', '=', 'GroupSearchMapItem.GroupSearchId')
             ->join('MapItem', 'MapItem.Id', '=', 'GroupSearchMapItem.MapItemId')
+             ->where('MapItem.Status', '!=', DISABLE)
             ->join('T2Location', 'T2Location.Id', '=', 'MapItem.T2LocationId')
             ->join('ItemTitle', 'ItemTitle.Id', '=', 'MapItem.TitleId')
             ->join('TextContent as TitleText', 'TitleText.Id', '=', 'ItemTitle.TextcontentId')

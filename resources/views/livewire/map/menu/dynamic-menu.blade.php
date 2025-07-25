@@ -42,7 +42,7 @@
         });
         
         $searchItems = array_filter($menuItems, function($item) {
-            return in_array($item['route'], ['group-search', 'group-search-map-item']);
+            return in_array($item['route'], ['group-search', 'group-search-map-item', 'key-search']);
         });
         
         $bannerItems = array_filter($menuItems, function($item) {
