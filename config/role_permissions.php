@@ -17,10 +17,10 @@ return [
             'translation', 'item-type', 'item-description', 'language'
         ],
         'kds' => [
-            'map-item', 'item-title', 't2-location', 'text-content', 'translations',   'item-description','item-type', 'item-title', 'translation', 'group-search', 'group-search-map-item'
+            'map-item', 'item-title', 't2-location', 'text-content', 'translations',   'item-description','item-type', 'item-title', 'translation', 'group-search', 'group-search-map-item' ,'key-search'
         ],
         'toc' => [
-            'map-item', 'item-title', 't2-location', 'text-content','language', 'translations', 'item-description','item-type', 'item-title', 'translation', 'signage', 'signage-devicetouch', 'signage-mapitem', 'group-search', 'group-search-map-item'
+            'map-item', 'item-title', 't2-location', 'text-content','language', 'translations', 'item-description','item-type', 'item-title', 'translation', 'signage', 'signage-devicetouch', 'signage-mapitem', 'group-search', 'group-search-map-item', 'key-search'
         ],
     ],
     
@@ -57,7 +57,7 @@ return [
         'translation' => ['admin', 'staff'],
         'item-type' => ['admin', 'staff'],
         'item-description' => ['admin', 'staff'],
-        
+        'key-search' => ['admin', 'staff', 'kds', 'toc'],
         // Module dành riêng cho admin
         'admin-management' => ['admin']
     ]

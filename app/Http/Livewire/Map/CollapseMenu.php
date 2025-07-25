@@ -136,6 +136,16 @@ class CollapseMenu extends Component
                 'active' => request()->routeIs('group-search-map-item*')
             ];
         }
+
+        // Menu Key Search
+        if ($this->hasPermission('key-search')) {
+            $items[] = [
+                'title' => 'Key Search',
+                'icon' => 'fas fa-fw fa-key',
+                'route' => 'key-search',
+                'active' => request()->routeIs('key-search*')
+            ];
+        }
         
         // ===== DEVICE & TOUCH SCREEN SECTION =====
         
