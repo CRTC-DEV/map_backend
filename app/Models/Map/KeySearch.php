@@ -21,4 +21,9 @@ class KeySearch extends Model
         'ModifiDate',
     ];
     public $timestamps = false;
+
+    public function getAllItems()
+    {
+        return $this->all();
+    }
 }
