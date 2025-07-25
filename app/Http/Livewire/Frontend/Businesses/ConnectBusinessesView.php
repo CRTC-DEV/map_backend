@@ -48,12 +48,10 @@ class ConnectBusinessesView extends Component
 
     public function render()
     {
-        $query = ConnectBusinesses::where('SubMenuId', $this->connect_businesses->SubMenuId)
-            ->where('Status', '!=', DISABLE);
+        $query = ConnectBusinesses::where('SubMenuId', $this->connect_businesses->SubMenuId);
 
         if ($this->connect_businesses->Id) {
             $query->where('Id', '!=', $this->connect_businesses->Id)
-                ->where('Status', '!=', DISABLE)
                 ->orderBy('ModifiDate', 'DESC');
         }
 
