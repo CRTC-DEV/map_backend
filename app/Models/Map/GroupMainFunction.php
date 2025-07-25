@@ -131,8 +131,8 @@ class GroupMainFunction extends Model
 
 
             )
-            ->get();
-            
+            ->orderBy('GroupMainFunction.OrderIndex', 'ASC')->get();
+           
         return $return;
     }
 
@@ -250,7 +250,7 @@ function getAllGroupMainFunctionByDeviceAPI($LangguaId, $deviceid)
 
 
             )
-            ->get();
+            ->orderBy('GroupMainFunction.OrderIndex', 'ASC')->get();
            //dd(response()->json($return));
         return $return;
     }
@@ -282,6 +282,7 @@ public function getGroupMainFunctionByDevice($LanguageId = null, $floor = null, 
                     'Latitudes',
                     'T2Location.Floor as Sub_Floor',
                 )
+                    
                 ->get()
                 ->groupBy('Sub_SignagesId')
                 ->map(function ($group) {
