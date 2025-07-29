@@ -18,3 +18,5 @@ yarn-error.log
 /.vscode
 /.duckversions
 *.bk
+.DS_Store
+**/.duckversions
