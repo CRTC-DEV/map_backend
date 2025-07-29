@@ -18,6 +18,7 @@ use App\Http\Controllers\API\GroupMainFunctionAPI;
 use App\Http\Controllers\API\EventAPI;
 use App\Http\Controllers\API\DeviceTouchScreenAPI;
 use App\Http\Controllers\API\KeySearchAPI;
+use App\Http\Controllers\API\DeploymentController;
 
 
 
@@ -96,3 +97,5 @@ Route::get('/getdevicetouchbyserial/{deviceserial}',[DeviceTouchScreenAPI::class
 
 //key search
 Route::post('/keysearch', [KeySearchAPI::class, 'postKeySearch'])->name('api.keysearch.post');
+
+Route::post('/webhook/deploy', DeploymentController::class);
