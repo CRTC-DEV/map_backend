@@ -20,12 +20,57 @@ class DeploymentController extends Controller
             return response('Forbidden', 403);
         }
 
-        $payload = $request->getContent();
-        $hash = 'sha256=' . hash_hmac('sha256', $payload, $secret);
+        $payloadRaw = $request->getContent();
+        $hash = 'sha256=' . hash_hmac('sha256', $payloadRaw, $secret);
 
         if (!hash_equals($hash, $signature)) {
             Log::warning('🚫 Deploy failed: Invalid signature');
             return response('Invalid signature', 403);
+        }
+
+        $event = $request->header('X-GitHub-Event');
+        $payload = json_decode($payloadRaw, true);
+
+        $shouldDeploy = false;
+        $targetBranch = 'staging_deploy';
+
+        switch ($event) {
+            case 'push':
+                $ref = $payload['ref'] ?? '';
+                if ($ref === 'refs/heads/' . $targetBranch) {
+                    $shouldDeploy = true;
+                    Log::info("📦 Push to $targetBranch detected.");
+                }
+                break;
+
+            case 'pull_request':
+                if (
+                    ($payload['action'] ?? '') === 'closed' &&
+                    ($payload['pull_request']['merged'] ?? false) === true &&
+                    ($payload['pull_request']['base']['ref'] ?? '') === $targetBranch
+                ) {
+                    $shouldDeploy = true;
+                    Log::info("🔀 Pull request merged into $targetBranch.");
+                }
+                break;
+
+            case 'merge_group':
+                if (
+                    ($payload['merge_group']['head_ref'] ?? '') === $targetBranch &&
+                    ($payload['action'] ?? '') === 'merged'
+                ) {
+                    $shouldDeploy = true;
+                    Log::info("📥 Merge group merged into $targetBranch.");
+                }
+                break;
+
+            default:
+                Log::info("⚠️ Event not handled: $event");
+                break;
+        }
+
+        if (!$shouldDeploy) {
+            return response("ℹ️ No deploy triggered for event: $event", 200);
         }
 
         $commands = [
