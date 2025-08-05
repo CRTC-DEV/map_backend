@@ -17,7 +17,7 @@ return [
             'translation', 'item-type', 'item-description', 'language'
         ],
         'kds' => [
-            'map-item', 'item-title', 't2-location', 'text-content', 'translations',   'item-description','item-type', 'item-title', 'translation', 'group-search', 'group-search-map-item' ,'key-search'
+            'map-item', 'item-title', 't2-location', 'text-content', 'translations',   'item-description','item-type', 'item-title', 'translation', 'group-search', 'group-search-map-item' ,'key-search', 'signage-mapitem'
         ],
         'toc' => [
             'map-item', 'item-title', 't2-location', 'text-content','language', 'translations', 'item-description','item-type', 'item-title', 'translation', 'signage', 'signage-devicetouch', 'signage-mapitem', 'group-search', 'group-search-map-item', 'key-search'
