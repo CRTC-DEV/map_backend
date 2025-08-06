@@ -77,7 +77,7 @@
                             aria-label="Gender select example">
 
                             @foreach ($map_item as $item)
-                                <option value="{{ $item->Id }}">{{ $item->CadId }}-{{ $item->KeySearch }}</option>
+                                <option value="{{ $item->Id }}">{{ $item->CadId }} - {{ $item->TitleText }}</option>
                             @endforeach
                         </select>
                         @error('map_item.Id')

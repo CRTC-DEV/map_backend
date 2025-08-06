@@ -82,7 +82,6 @@ public $message;
     public function save(){
         $this->logMapAttempt('SAVE', 'Group Search Map Item');
 
-
         $this->validate();
 
         // dd($this->group_search_map_item, $this->group_search, $this->map_item_id, $this->group_search_id, $this->map_item_id_old);

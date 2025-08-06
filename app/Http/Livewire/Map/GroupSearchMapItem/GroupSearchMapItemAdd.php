@@ -65,8 +65,8 @@ public $message;
                   ->orWhere('KeySearch', 'like', '%' . $this->searchMapItem . '%');
             });
         }
-        
-        $this->filteredMapItems = $query->get();
+
+        $this->filteredMapItems = $query->with('title.textcontent')->get();
     }
 
     public function updatedSearchMapItem()

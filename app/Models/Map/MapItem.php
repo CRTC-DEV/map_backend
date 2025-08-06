@@ -3,6 +3,7 @@
 namespace App\Models\Map;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ItemTitle;
 
 class MapItem extends Model
 {
@@ -12,6 +13,12 @@ class MapItem extends Model
     // Add fields that can be mass-assigned
     protected $fillable = ['CadId', 'KeySearch', 'Status', 'CreateDate', 'ModifiDate', 'T2LocationId', 'TitleId', 'DescriptionId', 'ItemTypeId', 'UserId', 'Longitudes', 'Latitudes', 'Rank', 'AreaSide', 'ImgUrl']; // Example fields
     public $timestamps = false;
+
+    function title()
+    {
+        return $this->belongsTo(ItemTitle::class, 'TitleId', 'Id');
+    }
+
     function getAllMapItems()
     {
         $data = MapItem::where('MapItem.Status', '!=', DELETED_FLG)

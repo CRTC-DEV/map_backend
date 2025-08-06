@@ -38,7 +38,7 @@
                             aria-label="Gender select example">
                             <option value="{{ null }}">please select</option>
                             @foreach($filteredMapItems as $item)
-                                <option value="{{ $item->Id }}">{{ $item->CadId }}-{{ $item->KeySearch }}</option>
+                                <option value="{{ $item->Id }}">{{ $item->CadId }} - {{ $item->title->textcontent->OriginalText ?? '' }}</option>
                             @endforeach
                         </select>
                         @error('group_search_map_item.MapItemId') <div class="invalid-feedback">{{ $message }}</div> @enderror
