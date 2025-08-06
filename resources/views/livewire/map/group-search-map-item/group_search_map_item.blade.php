@@ -64,7 +64,7 @@
                                         <td>
                                             <a href="group-search-map-item-edit/{{ $groupId }},{{ $item['MapItemId'] }}"
                                                 class="m-0 font-weight-bold text-primary">
-                                                {{ $item['MapItemCadId'] }} - {{ $item['MapItemKeySearch'] }}
+                                                {{ $item['MapItemCadId'] }} - {{ $item['MapItemTitleText'] }}
                                             </a>
                                         </td>
                                         <td>{{ $item->Priority ?? 'N/A' }}</td>

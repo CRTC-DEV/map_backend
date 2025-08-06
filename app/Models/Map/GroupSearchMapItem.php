@@ -40,15 +40,18 @@ class GroupSearchMapItem extends Model
         $return = GroupSearchMapItem::where('GroupSearchMapItem.Status', '!=', DELETED_FLG)
             ->join('GroupSearch', 'GroupSearch.Id', '=', 'GroupSearchMapItem.GroupSearchId')
             ->join('MapItem', 'MapItem.Id', '=', 'GroupSearchMapItem.MapItemId')
+            ->join('ItemTitle', 'ItemTitle.Id', '=', 'MapItem.TitleId')
+            ->join('TextContent as TitleText', 'TitleText.Id', '=', 'ItemTitle.TextcontentId')
             ->select(
                 'GroupSearchMapItem.*',
                 'MapItem.KeySearch as MapItemKeySearch',
+                'TitleText.OriginalText as TitleText',
                 'GroupSearch.Name as GroupSearchName',
                 'GroupSearch.KeySearch as GroupSearchKeySearch'
             )
             ->orderBy('GroupSearch.Id', 'DESC');
         // ->get();
-        //dd($return);  
+        // dd($return);  
         if (!empty($search)) {
             $return->where(function ($return) use ($search) {
                 $return->where('GroupSearch.Name', 'like', '%' . $search . '%');
@@ -66,12 +69,15 @@ class GroupSearchMapItem extends Model
         $query = GroupSearchMapItem::where('GroupSearchMapItem.Status', '!=', DELETED_FLG)
             ->join('GroupSearch', 'GroupSearch.Id', '=', 'GroupSearchMapItem.GroupSearchId')
             ->join('MapItem', 'MapItem.Id', '=', 'GroupSearchMapItem.MapItemId')
+            ->join('ItemTitle', 'ItemTitle.Id', '=', 'MapItem.TitleId')
+            ->join('TextContent as TitleText', 'TitleText.Id', '=', 'ItemTitle.TextcontentId')
             ->select(
                 'GroupSearchMapItem.*',
                 'MapItem.KeySearch as MapItemKeySearch',
                 'MapItem.CadId as MapItemCadId',
                 'GroupSearch.Name as GroupSearchName',
-                'GroupSearch.KeySearch as GroupSearchKeySearch'
+                'GroupSearch.KeySearch as GroupSearchKeySearch',
+                'TitleText.OriginalText as MapItemTitleText'
             )
             ->orderBy('GroupSearch.Id', 'DESC');
 
