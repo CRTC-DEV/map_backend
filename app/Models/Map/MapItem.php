@@ -166,7 +166,6 @@ class MapItem extends Model
     function getAllMapItemsFull()
     {
         $data = MapItem::where('MapItem.Status', '!=', DELETED_FLG)
-            // ->where('T2Location.Floor', $floor)
             ->join('T2Location', 'T2Location.Id', '=', 'MapItem.T2LocationId')
             ->join('ItemTitle', 'ItemTitle.Id', '=', 'MapItem.TitleId')
             ->join('ItemDescription', 'ItemDescription.Id', '=', 'MapItem.DescriptionId')
@@ -186,15 +185,11 @@ class MapItem extends Model
                 'DescriptionText.OriginalText as DescriptionText'
             )
             ->get(); 
-
-        // Xử lý URL hình ảnh cho từng item
         foreach ($data as $item) {
-            // Đảm bảo URL hình ảnh đầy đủ nếu tồn tại
             if ($item->ImgUrl && strpos($item->ImgUrl, 'http://') !== 0 && strpos($item->ImgUrl, 'https://') !== 0 && strpos($item->ImgUrl, '/') !== 0) {
                 $item->ImgUrl = url('storage/' . $item->ImgUrl);
             }
         }
-            
         return $data;
     }
 }
