@@ -3,6 +3,7 @@
 namespace App\Models\Map;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\ItemTitle;
 
 class MapItem extends Model
 {
@@ -12,6 +13,12 @@ class MapItem extends Model
     // Add fields that can be mass-assigned
     protected $fillable = ['CadId', 'KeySearch', 'Status', 'CreateDate', 'ModifiDate', 'T2LocationId', 'TitleId', 'DescriptionId', 'ItemTypeId', 'UserId', 'Longitudes', 'Latitudes', 'Rank', 'AreaSide', 'ImgUrl']; // Example fields
     public $timestamps = false;
+
+    function title()
+    {
+        return $this->belongsTo(ItemTitle::class, 'TitleId', 'Id');
+    }
+
     function getAllMapItems()
     {
         $data = MapItem::where('MapItem.Status', '!=', DELETED_FLG)
@@ -130,6 +137,42 @@ class MapItem extends Model
             //Join with ItemType
             ->join('ItemType', 'ItemType.Id', '=', 'MapItem.ItemTypeId')
             // Select necessary columns from the joined tables
+            ->select(
+                'MapItem.*',
+                'T2Location.Zone',
+                'T2Location.Floor',
+                'T2Location.Name as LocationName',
+                'T2Location.Id as LocationId',
+                'ItemTitle.Id as ItemTitleId',
+                'TitleText.OriginalText as TitleText',
+                'ItemType.IsShow as ItemTypeIsShow',
+                'ItemDescription.Id as ItemDescriptionId',
+                'DescriptionText.OriginalText as DescriptionText'
+            )
+            ->get(); 
+
+        // Xử lý URL hình ảnh cho từng item
+        foreach ($data as $item) {
+            // Đảm bảo URL hình ảnh đầy đủ nếu tồn tại
+            if ($item->ImgUrl && strpos($item->ImgUrl, 'http://') !== 0 && strpos($item->ImgUrl, 'https://') !== 0 && strpos($item->ImgUrl, '/') !== 0) {
+                $item->ImgUrl = url('storage/' . $item->ImgUrl);
+            }
+        }
+            
+        return $data;
+    }
+
+    // get full map item without floor
+    function getAllMapItemsFull()
+    {
+        $data = MapItem::where('MapItem.Status', '!=', DELETED_FLG)
+            // ->where('T2Location.Floor', $floor)
+            ->join('T2Location', 'T2Location.Id', '=', 'MapItem.T2LocationId')
+            ->join('ItemTitle', 'ItemTitle.Id', '=', 'MapItem.TitleId')
+            ->join('ItemDescription', 'ItemDescription.Id', '=', 'MapItem.DescriptionId')
+            ->join('TextContent as TitleText', 'TitleText.Id', '=', 'ItemTitle.TextcontentId')
+            ->join('TextContent as DescriptionText', 'DescriptionText.Id', '=', 'ItemDescription.TextcontentId')
+            ->join('ItemType', 'ItemType.Id', '=', 'MapItem.ItemTypeId')
             ->select(
                 'MapItem.*',
                 'T2Location.Zone',

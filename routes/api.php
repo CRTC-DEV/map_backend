@@ -96,3 +96,6 @@ Route::get('/getdevicetouchbyserial/{deviceserial}',[DeviceTouchScreenAPI::class
 
 //key search
 Route::post('/keysearch', [KeySearchAPI::class, 'postKeySearch'])->name('api.keysearch.post');
+
+// Get Map Item full
+Route::get('/mapitem', [MapItemAPI::class, 'getMapItemFull'])->name('api.map-item.get');
