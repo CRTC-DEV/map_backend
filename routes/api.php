@@ -99,3 +99,5 @@ Route::get('/getdevicetouchbyserial/{deviceserial}',[DeviceTouchScreenAPI::class
 Route::post('/keysearch', [KeySearchAPI::class, 'postKeySearch'])->name('api.keysearch.post');
 
 Route::post('/webhook/deploy', DeploymentController::class);
+// Get Map Item full
+Route::get('/mapitem', [MapItemAPI::class, 'getMapItemFull'])->name('api.map-item.get');

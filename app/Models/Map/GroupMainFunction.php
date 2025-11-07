@@ -273,7 +273,9 @@ public function getGroupMainFunctionByDevice($LanguageId = null, $floor = null, 
                 ->join('MapItem', 'MapItem.Id', '=', 'SignageMapItem.MapItemId')
                 ->where('MapItem.Status', '!=', DISABLE)
                 ->join('T2Location', 'T2Location.Id', '=', 'MapItem.T2LocationId')
-                ->where('T2Location.Floor', '=', $floor) // Filter for Sub_Floor = 2
+                ->when(($item['G_Name'] ?? null) !== 'Gates', function ($q) use ($floor) {
+                    return $q->where('T2Location.Floor', '=', $floor); // Filter for Sub_Floor = 2
+                })
                 ->select(
                     'SignageId as Sub_SignagesId',
                     'MapItemId as id',
@@ -329,7 +331,9 @@ public function getGroupMainFunctionByDevice($LanguageId = null, $floor = null, 
                 ->where ('MapItem.AreaSide', '=', $DeviceAreaSide)
                  ->where('MapItem.Status', '!=', DISABLE)
                 ->join('T2Location', 'T2Location.Id', '=', 'MapItem.T2LocationId')
-                ->where('T2Location.Floor', '=', $floor) // Filter for Sub_Floor = 2
+                ->when(($item['G_Name'] ?? null) !== 'Gates', function ($q) use ($floor) {
+                    return $q->where('T2Location.Floor', '=', $floor); // Filter for Sub_Floor = 2
+                })
              
                 ->select(
                     'SignageId as Sub_SignagesId',
