@@ -163,7 +163,8 @@ class GroupSearchMapItem extends Model
 
                  $queryT2Location = T2Location::where('Id', $FloorIdOfDevice)->first();
                  $FloorOfDevice = $queryT2Location->Floor;
-                 //dd($IsSideOfDevice);
+                 dd($IsSideOfDevice);
+                // dd($FloorOfDevice);
               
         // Kiểm tra khoảng trắng trong keysearch
         $keysearch = trim($keysearch);
@@ -199,8 +200,7 @@ class GroupSearchMapItem extends Model
         
         // Sắp xếp theo Priority tăng dần (giá trị nhỏ lên đầu)
         $query->orderBy('GroupSearchMapItem.Priority', 'asc')
-              ->take(10);  // Giới hạn 10 kết quả
-
+              ->take(20);  // Giới hạn 10 kết quả
        
         return $query->get();
     }
